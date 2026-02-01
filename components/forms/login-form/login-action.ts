@@ -19,7 +19,7 @@ export default async function LoginAction(prevState: any, formData: FormData): P
 
 	const cookieStore = await cookies();
 
-	cookieStore.set("slmauth", Buffer.from(process.env.PASSWORD as string + process.env.APP_SECRET as string).toString("base64"), { maxAge: 300 });
+	cookieStore.set("slmauth", Buffer.from(process.env.PASSWORD as string + process.env.APP_SECRET as string).toString("base64"), { maxAge: 3600 });
 	return {
 		success: true
 	}
