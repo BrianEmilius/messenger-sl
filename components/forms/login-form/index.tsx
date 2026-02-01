@@ -18,7 +18,7 @@ export default function LoginForm() {
 					<span>Password</span>
 					<input type="password" name="password" />
 				</label>
-				<span></span>
+				{formState.success ? null : <span>{formState.errors?.join(", ")}</span>}
 			</div>
 			<button type="submit">Log in</button>
 		</form>
