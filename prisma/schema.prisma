@@ -12,7 +12,7 @@ datasource db {
 
 model Agent {
   id        String   @unique @default(uuid())
-  key       String
+  key       String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
