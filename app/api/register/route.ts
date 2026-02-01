@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
+import { PrismaClientValidationError } from "@prisma/client/runtime/client";
 import { NextResponse } from "next/server";
+
+let errors = 0;
 
 export async function POST(request: Request) {
 	const body = await request.json();
@@ -11,16 +14,20 @@ export async function POST(request: Request) {
 
 	console.log("creating DB entries");
 
-	try {
-		const createdAgents = prisma.agent.createMany({
-			data: agents
-		});
+	agents.forEach(async (agent: { key: string }) => {
+		try {
+			const found = await prisma.agent.findUnique({ where: agent });
+			if (found) return;
+			const createdAgent = await prisma.agent.create({
+				data: agent
+			});
+			console.log("Created agent", createdAgent);
+		} catch (error) {
+			console.log("error", error);
+			errors++;
+		}
+	});
 
-		console.log("Created agents", createdAgents);
-
-		return NextResponse.json({ success: true });
-	} catch (error) {
-		console.log("error", error);
-		return NextResponse.json({ success: false });
-	}
+	if (errors) return NextResponse.json({ success: false });
+	return NextResponse.json({ success: true });
 }
