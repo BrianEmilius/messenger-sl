@@ -1,4 +1,4 @@
-import { Agent } from "@/generated/prisma/client";
+import { Agent } from "@/lib/generated/prisma/client";
 import { parse } from "node-html-parser";
 import { CgProfile } from "react-icons/cg";
 
