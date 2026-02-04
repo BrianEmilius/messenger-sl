@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { PrismaClientValidationError } from "@prisma/client/runtime/client";
 import { NextResponse } from "next/server";
 
 let errors = 0;

@@ -1,5 +1,5 @@
 import AgentListItem from "@/components/ui/agent-list-item";
-import { Agent } from "@/generated/prisma/client";
+import { Agent } from "@/lib/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export default async function Home() {
