@@ -10,6 +10,8 @@ export async function POST(request: Request) {
 		key: agent
 	}));
 
+	console.log("body recieved", agents);
+
 	agents.forEach(async (agent: { key: string }) => {
 		try {
 			const found = await prisma.agent.findUnique({ where: agent });
@@ -17,6 +19,7 @@ export async function POST(request: Request) {
 			const createdAgent = await prisma.agent.create({
 				data: agent
 			});
+			console.log("inserted new agent", createdAgent);
 		} catch (error) {
 			console.log("error", error);
 			errors++;
